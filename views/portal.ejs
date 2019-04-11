@@ -21,8 +21,7 @@
             <td><%=jobs.location%></td>
             <td><%=jobs.salary%></td>
             <td class ='td-flex'>
-                <form>
-                    <button class="btn btn-sm btn-warning">Edit</button>
+                <a class ='btn btn-warning' href = '/staff_portal/<%=jobs._id%>/edit'>Edit</a>
                 </form>
                 <form id ='del-form'action ='/staff_portal/<%=jobs._id%>?_method=DELETE' method = 'POST'>
                     <button class="btn btn-sm btn-danger">Delete</button>

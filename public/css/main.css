@@ -25,10 +25,10 @@
 	justify-content:space-around;
 }
 
-.td-flex button {
-	justify-content: space-between;
+.text-box {
+	height:10em;
+	width:100%;
 }
-
 /* Autohide navbar */
 .slideUp { top:-100px; }
 .headroom { -webkit-transition: all 0.4s ease-out; -moz-transition: all 0.4s ease-out; -o-transition: all 0.4s ease-out; transition: all 0.4s ease-out; }

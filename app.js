@@ -73,18 +73,32 @@ app.get('/jobs', (req,res) => res.render('jobs'))
 
 app.get('/1234/create/new/newadmin/create1234', (req,res) => res.render('reg'))
 
-// router.get('/', (req,res) => {
-//     Campground.find({}, (err, allcampgrounds) => err? console.log(err) : res.render('campgrounds/index',{campVar:allcampgrounds}));
-// });
-
-
 app.get('/staff_portal', (req,res)=> {
     Job.find({}, (err,allJobs) => err? console.log(err) : res.render('portal', {allJobs:allJobs}))
 });
 
 app.get('/staff_portal/newjob', (req,res) => res.render('newjob'))
 
+// router.get('/:id/edit',middleware.checkCampOwnership,(req,res) => {
+//     Campground.findById(req.params.id, function(err,foundCampground){
+//         res.render("campgrounds/edit", {campground: foundCampground});
+//     });
+// });
+
+app.get('/staff_portal/:id/edit', (req,res)=> {
+    Job.findById(req.params.id, function(err,foundJob){
+        res.render('editjob', {job:foundJob});
+    });
+});
+    
+
 //--get routes--end 
+
+
+
+
+
+
 
 //--post routes
 
@@ -121,19 +135,31 @@ app.post('/staff_portal', (req,res) => {
 //--post route--end
 
 
+//--update route
 
-//--delete routes
-
-// router.delete('/:id',middleware.checkCampOwnership, (req,res)=> {
-//     Campground.findByIdAndRemove(req.params.id, (err) => err? res.redirect('/campgrounds') :
-//     res.redirect('/campgrounds'))
+// router.put('/:id',middleware.checkCampOwnership, (req,res) => {
+//     Campground.findByIdAndUpdate(req.params.id,req.body.campground, (err,updatedCampground) => err? res.redirect('/campgrounds') :
+//     res.redirect('/campgrounds/'+req.params.id));
 // });
 
+
+app.put('/staff_portal/:id', (req,res) => {
+    console.log(req.body.job);
+    Job.findOneAndUpdate(req.params.id,req.body.job, (err,updatedJob) => err? res.redirect('/staff_portal') :
+    res.redirect('/staff_portal'));
+    
+});
+
+
+
+//--delete routes
 
 app.delete('/staff_portal/:id',(req,res)=> {
     Job.findByIdAndDelete(req.params.id, (err) => err? res.redirect('/staff_portal') :
     res.redirect('/staff_portal'))
 });
+
+//--delete route --end 
 
 
 
