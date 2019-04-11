@@ -20,6 +20,14 @@
 	margin-top:10em;
 }
 
+.td-flex {
+	display:flex;
+	justify-content:space-around;
+}
+
+.td-flex button {
+	justify-content: space-between;
+}
 
 /* Autohide navbar */
 .slideUp { top:-100px; }

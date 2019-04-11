@@ -5,7 +5,8 @@ var express     = require("express"),
     methodOverride = require("method-override"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"), 
-    User        = require("./models/user");
+    User        = require("./models/user"), 
+    Job  = require("./models/jobs");
     
 
 
@@ -61,16 +62,32 @@ const authenticator = (passport.authenticate('local', {
 //--get routes
 
 app.get('/', (req,res) => res.render('index'))
+
 app.get('/about', (req,res) => res.render('about'))
+
 app.get('/login', (req,res) => res.render('login'))
-app.get('/jobs', (req,res) => res.render('jobs'))
-app.get('/1234/create/new/newadmin/create1234', (req,res) => res.render('reg'))
-app.get('/staff_portal', (req,res)=> res.render('portal'))
+
 app.get('/logout', (req,res) => (req.logout() ,res.redirect('/jobs')));
+
+app.get('/jobs', (req,res) => res.render('jobs'))
+
+app.get('/1234/create/new/newadmin/create1234', (req,res) => res.render('reg'))
+
+// router.get('/', (req,res) => {
+//     Campground.find({}, (err, allcampgrounds) => err? console.log(err) : res.render('campgrounds/index',{campVar:allcampgrounds}));
+// });
+
+
+app.get('/staff_portal', (req,res)=> {
+    Job.find({}, (err,allJobs) => err? console.log(err) : res.render('portal', {allJobs:allJobs}))
+});
+
+app.get('/staff_portal/newjob', (req,res) => res.render('newjob'))
 
 //--get routes--end 
 
 //--post routes
+
 app.post('/login', authenticator ,(req,res,err) => {
     
 });
@@ -88,7 +105,40 @@ app.post("/1234/create/new/newadmin/create1234", function(req, res){
     });
 });
 
-//-post route--end
+
+app.post('/staff_portal', (req,res) => {
+    let jobTitle = req.body.jTitle
+    let jobLocation = req.body.jLocation
+    let jobSalary = req.body.jSalary
+    let jobDescription = req.body.jDescription
+    
+    let newJob = {title:jobTitle, location:jobLocation, salary:jobSalary, description:jobDescription}
+    
+    Job.create(newJob, (err,newlyCreated) => err? console.log(err) : (res.redirect('/staff_portal'), console.log(newlyCreated)));
+    
+})
+
+//--post route--end
+
+
+
+//--delete routes
+
+// router.delete('/:id',middleware.checkCampOwnership, (req,res)=> {
+//     Campground.findByIdAndRemove(req.params.id, (err) => err? res.redirect('/campgrounds') :
+//     res.redirect('/campgrounds'))
+// });
+
+
+app.delete('/staff_portal/:id',(req,res)=> {
+    Job.findByIdAndDelete(req.params.id, (err) => err? res.redirect('/staff_portal') :
+    res.redirect('/staff_portal'))
+});
+
+
+
+
+
 
 
 

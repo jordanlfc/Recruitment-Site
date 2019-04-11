@@ -2,4 +2,42 @@
 
 
 
+<section class = "container splitter">
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Controls</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%allJobs.map(jobs => { %>
+        <tr>
+            <td><%=jobs.title%></td>
+            <td><%=jobs.location%></td>
+            <td><%=jobs.salary%></td>
+            <td class ='td-flex'>
+                <form>
+                    <button class="btn btn-sm btn-warning">Edit</button>
+                </form>
+                <form id ='del-form'action ='/staff_portal/<%=jobs._id%>?_method=DELETE' method = 'POST'>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+                <form>
+                    <button class="btn btn-sm btn-info">Hide</button>
+                </form>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+
 <% include ./partials/footer %>
+
+
+</section>
