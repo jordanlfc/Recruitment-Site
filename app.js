@@ -11,7 +11,7 @@ var express     = require("express"),
 
 
 
- mongoose.connect("mongodb+srv://jordanlfc1989:Salah3848!@cluster0-lzsn2.mongodb.net/recsite?retryWrites=true");
+mongoose.connect("mongodb+srv://jordanlfc1989:Salah3848!@cluster0-lzsn2.mongodb.net/recsite?retryWrites=true", {useNewUrlParser: true})
 // mongoose.connect('mongodb://localhost:27017/yelp_camp_v11', {useNewUrlParser: true});
 // mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
 
@@ -57,33 +57,28 @@ const authenticator = (passport.authenticate('local', {
 //-- functions--end 
 
 
-
-
 //--get routes
 
-app.get('/', (req,res) => res.render('index'))
+app.get('/', (req,res) => res.render('index'));
 
-app.get('/about', (req,res) => res.render('about'))
+app.get('/about', (req,res) => res.render('about'));
 
-app.get('/login', (req,res) => res.render('login'))
+app.get('/login', (req,res) => res.render('login'));
 
 app.get('/logout', (req,res) => (req.logout() ,res.redirect('/jobs')));
 
-app.get('/jobs', (req,res) => res.render('jobs'))
-
-app.get('/1234/create/new/newadmin/create1234', (req,res) => res.render('reg'))
-
-app.get('/staff_portal', (req,res)=> {
-    Job.find({}, (err,allJobs) => err? console.log(err) : res.render('portal', {allJobs:allJobs}))
+app.get('/jobs', (req,res) => {
+    Job.find({}, (err,allJobs) => err? console.log(err) : res.render('jobs', {allJobs:allJobs}));
 });
 
-app.get('/staff_portal/newjob', (req,res) => res.render('newjob'))
+app.get('/1234/create/new/newadmin/create1234', (req,res) => res.render('reg'));
 
-// router.get('/:id/edit',middleware.checkCampOwnership,(req,res) => {
-//     Campground.findById(req.params.id, function(err,foundCampground){
-//         res.render("campgrounds/edit", {campground: foundCampground});
-//     });
-// });
+app.get('/staff_portal', (req,res)=> {
+    Job.find({}, (err,allJobs) => err? console.log(err) : res.render('portal', {allJobs:allJobs}));
+});
+
+app.get('/staff_portal/newjob', (req,res) => res.render('newjob'));
+
 
 app.get('/staff_portal/:id/edit', (req,res)=> {
     Job.findById(req.params.id, function(err,foundJob){
@@ -93,10 +88,6 @@ app.get('/staff_portal/:id/edit', (req,res)=> {
     
 
 //--get routes--end 
-
-
-
-
 
 
 
@@ -121,26 +112,21 @@ app.post("/1234/create/new/newadmin/create1234", function(req, res){
 
 
 app.post('/staff_portal', (req,res) => {
-    let jobTitle = req.body.jTitle
-    let jobLocation = req.body.jLocation
-    let jobSalary = req.body.jSalary
-    let jobDescription = req.body.jDescription
+    let jobTitle = req.body.jTitle;
+    let jobLocation = req.body.jLocation;
+    let jobSalary = req.body.jSalary;
+    let jobDescription = req.body.jDescription;
     
-    let newJob = {title:jobTitle, location:jobLocation, salary:jobSalary, description:jobDescription}
+    let newJob = {title:jobTitle, location:jobLocation, salary:jobSalary, description:jobDescription};
     
     Job.create(newJob, (err,newlyCreated) => err? console.log(err) : (res.redirect('/staff_portal'), console.log(newlyCreated)));
     
-})
+});
 
 //--post route--end
 
 
 //--update route
-
-// router.put('/:id',middleware.checkCampOwnership, (req,res) => {
-//     Campground.findByIdAndUpdate(req.params.id,req.body.campground, (err,updatedCampground) => err? res.redirect('/campgrounds') :
-//     res.redirect('/campgrounds/'+req.params.id));
-// });
 
 
 app.put('/staff_portal/:id', (req,res) => {
@@ -166,10 +152,6 @@ app.delete('/staff_portal/:id',(req,res)=> {
 
 
 
-
-
-
-
 app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The YelpCamp Server Has Started!");
+   console.log("Server started.....");
 });
