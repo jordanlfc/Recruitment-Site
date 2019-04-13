@@ -11,9 +11,6 @@ var express     = require("express"),
     
 
 
-
-// mongoose.connect("mongodb+srv://jordanlfc1989:Salah3848!@cluster0-lzsn2.mongodb.net/recsite?retryWrites=true", {useNewUrlParser: true})
-// mongoose.connect('mongodb://localhost:27017/yelp_camp_v11', {useNewUrlParser: true});
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
 
 
