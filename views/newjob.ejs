@@ -8,16 +8,19 @@
 
             <form action='/staff_portal' method='POST'>
                 <div class='form-group'>
-                    <input class='form-control' type='text' name='jTitle' placeholder='Job Title'>
+                    <input class='form-control' type='text' name='jTitle' placeholder='Job Title' required>
                 </div>
                 <div class='form-group'>
-                    <input class='form-control' type='text' name='jLocation' placeholder='Location'>
+                    <input class='form-control' type='text' name='jLocation' placeholder='Location' required>
                 </div>
                 <div class='form-group'>
                     <input class='form-control' type='text' name='jSalary' placeholder='Salary'>
                 </div>
                 <div class='form-group'>
-                    <input class ='form-control text-box' name ='jDescription' placeholder = 'Job Description'>
+                    <input class='form-control' type='date' name='jDate' placeholder='Start Date' required>
+                </div>
+                <div class='form-group'>
+                    <input class ='form-control text-box' name ='jDescription' placeholder = 'Job Description'required>
                 </div>
                 <div class='form-group'>
                     <button class='btn btn-lg btn-block btn-primary'>Submit</button>

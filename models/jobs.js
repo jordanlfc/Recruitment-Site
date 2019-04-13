@@ -7,6 +7,7 @@ const jobSchema = new mongoose.Schema({
     location:String, 
     salary:String,
     description:String,
+    start_date:String,
 });
 
 
