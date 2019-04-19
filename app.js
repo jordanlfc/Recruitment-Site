@@ -126,8 +126,9 @@ app.post('/staff_portal',loginCheck,(req,res) => {
     let jobLocation = req.body.jLocation;
     let jobSalary = req.body.jSalary;
     let jobDescription = req.body.jDescription;
+    let jobDate = req.body.jDate
     
-    let newJob = {title:jobTitle, location:jobLocation, salary:jobSalary, description:jobDescription};
+    let newJob = {title:jobTitle, location:jobLocation, salary:jobSalary, start_date:jobDate ,description:jobDescription};
     
     Job.create(newJob, (err,newlyCreated) => err? console.log(err) : (res.redirect('/staff_portal'), console.log(newlyCreated)));
     
